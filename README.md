@@ -48,13 +48,24 @@ can be adopted for the overall pipeline.
 
 <br><br>
 <p align="left">
-  <img src="Figures/" width="600">
+  <img src="Figures/LLM_Fin.png" height="550">
 </p>
 <br><br>
 
 ## Study Highlights
 
 ### FinBERT Peer Bank Classifications
+<br><br>
+<p align="left">
+  <img src="Figures/Q_trends_execs.png" height="700">
+</p>
+<br><br>
+
+<br><br>
+<p align="left">
+  <img src="Figures/Ave_Quarterly_Sent_Trends.png" height="550">
+</p>
+<br><br>
 
   
 
@@ -63,11 +74,15 @@ can be adopted for the overall pipeline.
 
 <br><br>
 <p align="left">
-  <img src="Figures/" height="500">
+  <img src="Figures/Qtrends_model_2.png" height="650">
 </p>
 <br><br>
 
-
+<br><br>
+<p align="left">
+  <img src="Figures/CM_full.png" height="400">
+</p>
+<br><br>
 
 | Bank  | BAC | CITI | JPM 
 | :---: | :---: | :---: | :---: |
@@ -82,23 +97,22 @@ Confusion matrix plots were included to encapsulate the classification process.
 
 
 
-## Topic Extraction using Llama 3.1-8B 
-
-
+### Topic Extraction using Llama 3.1-8B 
 
 <br><br>
 <p align="left">
-  <img src="Figures/" width="1000">
+  <img src="Figures/topic_evo.png" width="950">
 </p>
 <br><br>
 
-
+### Sentiment Distribution Across Extracted Topics and Hedging Words
 
 <br><br>
 <p align="left">
-  <img src="Figures/" width="700">
+  <img src="Figures/topics_keywords.png" width="700">
 </p>
 <br><br>
+
 
 ## Summary & Conclusions
 The results highlight two things, FinBERT is likely struggling with the math and is overly influenced by the presence of trigger words. 
