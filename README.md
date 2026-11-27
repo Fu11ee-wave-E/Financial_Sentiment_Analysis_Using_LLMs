@@ -29,12 +29,12 @@ supported by a robust pipeline which:
 ## Data Sources & Pre-processing 
 
 The original provenance-linked corpus was constructed from 60 quarterly earnings calls from Bank 
-of America, Citi and JPMorgan spanning 2021Q1–2025Q4. The corpus was then organised into linked data 
+of America, Citigroup and JP Morgan spanning 2021Q1–2025Q4. The corpus was then organised into linked data 
 layers representing source provenance, canonical transcript structure, Q&A units, research views, and 
 quality-control records.
 
 
-## Study Described Here 
+## The Focussed Study Described Here
 
 * Performs financial sentiment analysis on the prepared remarks sections in isolation using FinBERT.
 * Relies on a research view where the prepared remarks sections of the 60 transcripts acquired has been filtered based on
