@@ -48,18 +48,27 @@ can be adopted for the overall pipeline.
 
 <br><br>
 <p align="left">
-  <img src="Figures/LLM_Fin.png" height="550">
+  <img src="Figures/LLM_Fin.png" width="800">
 </p>
 <br><br>
 
 ## Study Highlights
 
 ### FinBERT Peer Bank Classifications
+The plots below show the QoQ FinBERT sentiment classification across Bank of America, Citigroup and JP Morgan, and over a 5 year time window.
+While the yearly plots present a smoother, gradual change, the quarterly curves reveal sharp, immediate reactions to macro events and earnings shocks.
+
 <br><br>
 <p align="left">
   <img src="Figures/Q_trends_execs.png" height="700">
 </p>
 <br><br>
+
+The observations are also consistent with the expectation that CEOs tend to deliver strategic, future-oriented, and vision-focused narratives, which contain 
+a higher concentration of positive sentiment, whereas CFOs focus on structural facts. 
+
+More strikingly, the average quarterly sentiment trends appear predominantly negative, with a degree of variation by bank and by quarter. This could be due to the trigger-word 
+sensitivity of FinBERT towards hedging words such as ‘offset’ ‘reserve’ ‘risk’ ‘provision’ or ‘headwind’ that are heavily used in corporate language.
 
 <br><br>
 <p align="left">
@@ -70,7 +79,12 @@ can be adopted for the overall pipeline.
   
 
 ### FinBERT vs Llama 3.1-8B
-
+Since Llama-3.1 was tuned using reinforcement learning from human feedback (RLHF), 
+the need for a targeted fine-tuning approach (Konstantinidis et al., 2024) can be by-
+passed (***but not replaced***) assuming good alignment with human preferences. Consequently, the analysis 
+focuses on a direct comparison of zero-shot classification distributions across the 3 
+classes. The figure below shows the quarterly sentiment trends across the 3 banks, which 
+overlap only for the neutral labels. 
 
 <br><br>
 <p align="left">
@@ -78,11 +92,19 @@ can be adopted for the overall pipeline.
 </p>
 <br><br>
 
+The observation is also supported by the confusion matrix plot presented below, the diagonal of which shows the recall 
+scores obtained by assuming the Llama model produces the true labels. The percentages quoted in each tile suggest there is less
+than 21% agreement for the negative class, roughly 43% agreement for the neutral class and finally 13% agreement for the positive class. 
+
+
 <br><br>
 <p align="left">
   <img src="Figures/CM_full.png" height="400">
 </p>
 <br><br>
+
+The table below shows the bank-by-bank breakdown where we do not see much deviation from the average except for the JP Morgan case.
+
 
 | Bank  | BAC | CITI | JPM 
 | :---: | :---: | :---: | :---: |
@@ -92,12 +114,14 @@ can be adopted for the overall pipeline.
 | Positive | 0.14 | 0.13 | 0.12 | 
 | **Mean Accuracy**| 0.23  | 0.24 | 0.28 |
   
-  
-Confusion matrix plots were included to encapsulate the classification process. 
-
+For a given class, the recall score indicates the proportion of FinBERT labels matching that of Llama labels assigned for that class. 
+The mean accuracy scores (last row), give the proportion of total correct classifications made by FinBERT 
+out of all predictions without focusing on a specific label.
 
 
 ### Topic Extraction using Llama 3.1-8B 
+To understand the main themes behind the labels associated with the 5-sentence chunks, it is useful to perform a basic topic extraction from each row.
+The figure below shows the evolution of the Llama-extracted topics across each bank.
 
 <br><br>
 <p align="left">
@@ -105,7 +129,20 @@ Confusion matrix plots were included to encapsulate the classification process.
 </p>
 <br><br>
 
+The results show a range of topics that are discussed within the prepared remarks section which can be several pages long. As well as various financial 
+metrics quoted (e.g. credit costs,CapEX spending), there are themes of strategic outlook in various financial sectors and 
+markets (e.g. mergers and acqusitions, revenue growth,tax strategy).
+
+The colour map indicates topic prevalancy and show how topics like tax strategy, revenue growth, mergers and acquisitions as well as net 
+income dominate discussions QoQ, across all banks (even for the JPM CEO who rarely takes part in prepared remarks).
+
 ### Sentiment Distribution Across Extracted Topics and Hedging Words
+
+To understand the breakdown of sentiment distributions of broad themes discussed in 
+the executive remarks, the Llama-3.1 model was also used to extract the primary topics 
+for a given chunk, which are visualised in panel **A** of the figure below. The prepared remarks chunks 
+labelled negative by FinBERT were also searched for the top 10 hedging keywords which 
+are presented in panel **B**.  
 
 <br><br>
 <p align="left">
@@ -113,12 +150,21 @@ Confusion matrix plots were included to encapsulate the classification process.
 </p>
 <br><br>
 
+* The primary topics which were extracted by the Llama-3.1 model were then clustered hierarchically 
+using a lightweight open-source embedding model (all-MiniLM-L6-v2) for similarity matching.
+
+* As the labels assigned by the Llama model are predominantly positive or neutral, the occurrence of negative sentiment is 
+limited only to a few topics. 
+
+* The ‘hedging’ keywords were counted by targeting defensive words, 
+most likely to be used in chunked statements labelled as negative by FinBERT. For instance, the 
+word ‘offset’ appears in 281 negatively labelled chunks which makes up 21.2% of the negative 
+class.  
 
 ## Summary & Conclusions
 The results highlight two things, FinBERT is likely struggling with the math and is overly influenced by the presence of trigger words. 
 However, the executive remarks are not spontaneous and are usually delivered with a positive outlook, which aligns better with the Llama models reasoning.
-But is the Llama model itself robust to the well-known ‘sugar-coating’ problem ?  
-This should be tested using different prompting approaches and with different LLMs. 
+But is the Llama model itself robust to the well-known ‘sugar-coating’ problem ? This should be tested using different prompting approaches and with different LLMs. 
 
 
 </div>
